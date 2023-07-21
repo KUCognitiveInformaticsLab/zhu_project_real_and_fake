@@ -13,7 +13,7 @@ for model in ["MSE", "SSIM", "NLPD", "MS_SSIM", "LPIPS", "DISTS"]:
     ylabel = "1-"+model
   else:
     ylabel = model
-
+  plt.figure(figsize=(8,6))
   for i in range(18):
     nums = df[names[i]].tolist()
     plt.plot(xticks,nums)
