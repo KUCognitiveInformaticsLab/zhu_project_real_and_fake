@@ -168,10 +168,10 @@ for model in models:
 
 
 
-  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(r2,2))+"\\pm"+str(round(r2_err,2))+ \
+  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(r2,2))+"$\pm$"+str(round(r2_err,2))+ \
 
-  "&"+str(round(n_plcc,4))+"&"+str(round(n_srcc,4))+"&"+str(round(n_krcc,4))+"&"+str(round(n_r2,2))+"\\pm"+str(round(n_r2_err,2))+ \
-  "&"+str(round(u_plcc,4))+"&"+str(round(u_srcc,4))+"&"+str(round(u_krcc,4))+"&"+str(round(u_r2,2))+"\\pm"+str(round(u_r2_err,2))+"\\\\" \
+  "&"+str(round(n_plcc,4))+"&"+str(round(n_srcc,4))+"&"+str(round(n_krcc,4))+"&"+str(round(n_r2,2))+"$\pm$"+str(round(n_r2_err,2))+ \
+  "&"+str(round(u_plcc,4))+"&"+str(round(u_srcc,4))+"&"+str(round(u_krcc,4))+"&"+str(round(u_r2,2))+"$\pm$"+str(round(u_r2_err,2))+"\\\\" \
 
   )
 
