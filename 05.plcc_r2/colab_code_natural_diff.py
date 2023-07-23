@@ -68,20 +68,16 @@ for model in models:
 
 
     # # blur
-    # num1 = num1[18:36]
-    # num2 = num2[18:36]
+    # num1 = num1[9:18]
+    # num2 = num2[9:18]
 
 
 
     # # #noise
-    # num1 = num1[36:]
-    # num2 = num2[36:]
+    # num1 = num1[18:27]
+    # num2 = num2[18:27]
 
 
-    # n_num1 = num1[:9]
-    # u_num1 = num1[9:18]
-    # n_num2 = num2[:9]
-    # u_num2 = num2[9:18]
 
 
     r2 = r2_score(num1,num2)
