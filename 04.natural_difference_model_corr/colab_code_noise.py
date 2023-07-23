@@ -61,6 +61,7 @@ for model in ["MSE", "SSIM", "NLPD", "MS_SSIM", "LPIPS", "DISTS"]:
 
 
     # 绘制散点图
+    plt.figure(figsize=(8,6))
     sns.scatterplot(x=x, y=y,s=100)
     top = max(x+y)+0.01
     bottom = min(x+y)-0.01
