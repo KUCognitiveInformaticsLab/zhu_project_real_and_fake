@@ -64,7 +64,7 @@ for model in models:
     n_num2 = num2[:9]+num2[18:27]+num2[36:45]
     u_num2 = num2[9:18]+num2[27:36]+num2[45:54]
 
-    # swirl
+    # #swirl
     # num1 = num1[:18]
     # num2 = num2[:18]
 
@@ -168,10 +168,10 @@ for model in models:
 
 
 
-  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(r2,2))+"\\pm"+str(round(r2_err,2))+ \
+  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(r2,2))+"$\pm$"+str(round(r2_err,2))+ \
 
-  "&"+str(round(n_plcc,4))+"&"+str(round(n_srcc,4))+"&"+str(round(n_krcc,4))+"&"+str(round(n_r2,2))+"\\pm"+str(round(n_r2_err,2))+ \
-  "&"+str(round(u_plcc,4))+"&"+str(round(u_srcc,4))+"&"+str(round(u_krcc,4))+"&"+str(round(u_r2,2))+"\\pm"+str(round(u_r2_err,2))+"\\\\" \
+  "&"+str(round(n_plcc,4))+"&"+str(round(n_srcc,4))+"&"+str(round(n_krcc,4))+"&"+str(round(n_r2,2))+"$\pm$"+str(round(n_r2_err,2))+ \
+  "&"+str(round(u_plcc,4))+"&"+str(round(u_srcc,4))+"&"+str(round(u_krcc,4))+"&"+str(round(u_r2,2))+"$\pm$"+str(round(u_r2_err,2))+"\\\\" \
 
   )
 
