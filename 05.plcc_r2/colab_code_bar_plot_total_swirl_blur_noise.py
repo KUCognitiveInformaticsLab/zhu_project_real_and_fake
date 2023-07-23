@@ -52,10 +52,10 @@ for i in range(3):
   # plt.ylabel("sigma")
 
   plt.ylabel(ylabel,fontsize=20)
-  plt.xticks(fontsize=13)#
-  plt.yticks(fontsize=15)
+  plt.xticks(fontsize=20)#
+  plt.yticks(fontsize=20)
   # plt.ylim(0,1)
   # plt.legend(loc="right",fontsize=20)
-  plt.legend(fontsize=20)
+  plt.legend([curr],fontsize=20)
   plt.savefig( savefile )
   plt.show()
