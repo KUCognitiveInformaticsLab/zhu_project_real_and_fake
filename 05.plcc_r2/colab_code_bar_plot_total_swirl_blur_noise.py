@@ -56,6 +56,6 @@ for i in range(3):
   plt.yticks(fontsize=20)
   # plt.ylim(0,1)
   # plt.legend(loc="right",fontsize=20)
-  plt.legend([curr],fontsize=20)
+  plt.legend(fontsize=20)
   plt.savefig( savefile )
   plt.show()
