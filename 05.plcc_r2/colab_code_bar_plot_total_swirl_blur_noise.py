@@ -11,24 +11,24 @@ import matplotlib.pyplot as plt
 #   plt.savefig("01_model_corr_"+model.lower()+".png")
 #   plt.show()
 
-
+curr = "total"
 for i in range(3):
 
   if i==0:
     bar = bar_plcc
     bar_err = bar_plcc_err
     ylabel = "PLCC"
-    savefile = "model_corr_fig/03_model_plcc_all.png"
+    savefile = "model_corr_fig/03_model_plcc_"+curr+".png"
   elif i==1:
     bar = bar_srcc
     bar_err = bar_srcc_err
     ylabel = "SRCC"
-    savefile = "model_corr_fig/03_model_srcc_all.png"
+    savefile = "model_corr_fig/03_model_srcc_"+curr+".png"
   else:   
     bar = bar_krcc
     bar_err = bar_krcc_err
     ylabel = "KRCC"
-    savefile = "model_corr_fig/03_model_krcc_all.png"
+    savefile = "model_corr_fig/03_model_krcc_"+curr+".png"
   size = 7
   x = np.arange(size)
 
@@ -40,7 +40,7 @@ for i in range(3):
   names = ["HUMAN","MSE","SSIM","MS_SSIM","NLPD","LPIPS","DISTS"]
   plt.figure(figsize=(10,8))
   
-  plt.bar(x, bar[0] ,width=width,  label="total")
+  plt.bar(x, bar[0] ,width=width,  label=curr)
   plt.errorbar(x, bar[0], yerr=bar_err[0] ,fmt='-o',ecolor='black',elinewidth=2, alpha=0.7,capsize=4,linestyle='none',mec="none",mfc="black")
 
   plt.bar(x + width, bar[1],width=width,label="natural",tick_label=names)
