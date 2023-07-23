@@ -65,6 +65,7 @@ for model in ["MSE", "SSIM", "NLPD", "MS_SSIM", "LPIPS", "DISTS"]:
     marker_map = dict(zip(types,["X","o","s"]))
     color_map = dict(zip(types,["darkorange","forestgreen","slateblue"]))
     print(color_map)
+    plt.figure(figsize=(8,6))
 
     # 绘制散点图
     sns.scatterplot(x=x, y=y, hue=categories, style=categories,
