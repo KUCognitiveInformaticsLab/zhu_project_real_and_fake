@@ -39,9 +39,16 @@ for i in range(3):
   # names = ["animal","flower","foliage","fruit","landscape","manmade","shadow","texture","winter"]
   names = ["HUMAN","MSE","SSIM","MS_SSIM","NLPD","LPIPS","DISTS"]
   plt.figure(figsize=(10,8))
-  plt.bar(x, bar[0], yerr=bar_err[0] ,width=width,  label="total",capsize=4)
-  plt.bar(x + width, bar[1],yerr=bar_err[1],tick_label=names, width=width,label="natural" ,capsize=4)
-  plt.bar(x + 2*width, bar[2],yerr=bar_err[2], width=width,label="unnatural" ,capsize=4)
+  
+  plt.bar(x, bar[0] ,width=width,  label="total")
+  plt.errorbar(x, bar[0], yerr=bar_err[0] ,fmt='-o',ecolor='black',elinewidth=2, alpha=0.7,capsize=4,linestyle='none',mec="none",mfc="black")
+
+  plt.bar(x + width, bar[1],width=width,label="natural",tick_label=names)
+  plt.errorbar(x+ width, bar[1], yerr=bar_err[1] ,fmt='-o',ecolor='black',elinewidth=2, alpha=0.7,capsize=4,linestyle='none',mec="none",mfc="black")
+
+  plt.bar(x + 2*width, bar[2], width=width,label="unnatural")
+  plt.errorbar(x+ 2*width, bar[2], yerr=bar_err[2] ,fmt='-o',ecolor='black',elinewidth=2, alpha=0.7,capsize=4,linestyle='none',mec="none",mfc="black")
+
   # plt.ylabel("sigma")
 
   plt.ylabel(ylabel,fontsize=20)
