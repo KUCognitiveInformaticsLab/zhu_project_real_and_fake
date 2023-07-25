@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 #   plt.show()
 
 curr = "total"
-for i in range(3,4):
+for i in range(4):
 
   if i==0:
     bar = bar_plcc
