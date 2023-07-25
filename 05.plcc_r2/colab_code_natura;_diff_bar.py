@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 #   plt.show()
 
 curr = "total"
-for i in range(3):
+for i in range(3,4):
 
   if i==0:
     bar = bar_plcc
@@ -24,11 +24,17 @@ for i in range(3):
     bar_err = bar_srcc_err
     ylabel = "SRCC"
     savefile = "model_corr_fig/04_na_model_srcc_"+curr+".png"
-  else:   
+  elif i==2:
     bar = bar_krcc
     bar_err = bar_krcc_err
     ylabel = "KRCC"
     savefile = "model_corr_fig/04_na_model_krcc_"+curr+".png"
+  else:
+    bar = bar_slope
+    bar_err = bar_slope_err
+    ylabel = "slope"
+    savefile = "model_corr_fig/04_na_model_slope_"+curr+".png"
+  
   size = 7
   x = np.arange(size)
 
