@@ -3,13 +3,14 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error, r2_score
 from scipy.stats import sem
+import scipy.stats as stats
 
 # arr1 = np.array(num1)
 # arr2 = np.array(num2)
 # sst = np.sum((arr1-np.mean(arr1))**2)
 # ssr = np.sum((arr1-arr2)**2)
 # print(1-(ssr/sst))
-# 
+#
 # print(r2_score(arr1,arr2))
 
 models = ["HUMAN","MSE","SSIM","MS_SSIM","NLPD","LPIPS","DISTS"]
@@ -20,6 +21,12 @@ bar_srcc = [[] for i in range(3)]
 bar_srcc_err = [[] for i in range(3)]
 bar_krcc = [[] for i in range(3)]
 bar_krcc_err = [[] for i in range(3)]
+
+bar_slope = [[] for i in range(3)]
+bar_slope_err = [[] for i in range(3)]
+
+
+
 for model in models:
   filename = "total_analysis_normalize.csv"
   if model != "HUMAN":
@@ -34,14 +41,25 @@ for model in models:
   srccs = []
   krccs = []
   r2s = []
+  slopes = []
+
+
+
   n_plccs = []
   n_srccs = []
   n_krccs = []
   n_r2s = []
+  n_slopes = []
+
+
+
   u_plccs = []
   u_srccs = []
   u_krccs = []
   u_r2s = []
+  u_slopes = []
+
+
   for subject in range(14):
     num1 = df.iloc[subject][1:].tolist()
 
@@ -85,6 +103,7 @@ for model in models:
     # u_num1 = num1[9:18]
     # n_num2 = num2[:9]
     # u_num2 = num2[9:18]
+    slope, _, _, _, _ = stats.linregress(num1, num2)
 
     r2 = r2_score(num1,num2)
     plcc,_ = pearsonr(num1,num2)
@@ -94,26 +113,36 @@ for model in models:
     srccs.append(srcc)
     krccs.append(krcc)
     r2s.append(r2)
+    slopes.append(slope)
 
 
     n_plcc,_ = pearsonr(n_num1,n_num2)
     n_srcc,_ = spearmanr(n_num1,n_num2)
     n_krcc,_ = kendalltau(n_num1,n_num2)
     n_r2 = r2_score(n_num1,n_num2)
+    n_slope, _, _, _, _ = stats.linregress(n_num1, n_num2)
     n_plccs.append(n_plcc)
     n_srccs.append(n_srcc)
     n_krccs.append(n_krcc)
     n_r2s.append(n_r2)
+    n_slopes.append(n_slope)
 
     u_plcc,_ = pearsonr(u_num1,u_num2)
     u_srcc,_ = spearmanr(u_num1,u_num2)
     u_krcc,_ = kendalltau(u_num1,u_num2)
     u_r2 = r2_score(u_num1,u_num2)
+    u_slope, _, _, _, _ = stats.linregress(u_num1, u_num2)
 
     u_plccs.append(u_plcc)
     u_srccs.append(u_srcc)
     u_krccs.append(u_krcc)
     u_r2s.append(u_r2)
+    u_slopes.append(u_slope)
+
+
+
+
+
   plcc = np.mean(plccs)
   plcc_err = sem(plccs)
   srcc = np.mean(srccs)
@@ -122,6 +151,8 @@ for model in models:
   krcc_err = sem(krccs)
   r2 = np.mean(r2s)
   r2_err = sem(r2s)
+  slope = np.mean(slopes)
+  slope_err = sem(slopes)
 
   n_plcc = np.mean(n_plccs)
   n_plcc_err = sem(n_plccs)
@@ -131,6 +162,9 @@ for model in models:
   n_krcc_err = sem(n_krccs)
   n_r2 = np.mean(n_r2s)
   n_r2_err = sem(n_r2s)
+  n_slope = np.mean(n_slopes)
+  n_slope_err = sem(n_slopes)
+
 
   u_plcc = np.mean(u_plccs)
   u_plcc_err = sem(u_plccs)
@@ -140,6 +174,14 @@ for model in models:
   u_krcc_err = sem(u_krccs)
   u_r2 = np.mean(u_r2s)
   u_r2_err = sem(u_r2s)
+  u_slope = np.mean(u_slopes)
+  u_slope_err = sem(u_slopes)
+
+
+
+
+
+
   if model=="SSIM" or model=="MS_SSIM":
     model = "1-"+model
   if model=="1-MS_SSIM":
@@ -165,13 +207,28 @@ for model in models:
   bar_krcc_err[1].append(n_krcc_err)
   bar_krcc_err[2].append(u_krcc_err)
 
+  bar_slope[0].append(slope)
+  bar_slope[1].append(n_slope)
+  bar_slope[2].append(u_slope)
+  bar_slope_err[0].append(slope_err)
+  bar_slope_err[1].append(n_slope_err)
+  bar_slope_err[2].append(u_slope_err)
 
 
 
-  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(r2,2))+"$\pm$"+str(round(r2_err,2))+ \
+  # R^2
+  # print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(r2,2))+"$\pm$"+str(round(r2_err,2))+ \
 
-  "&"+str(round(n_plcc,4))+"&"+str(round(n_srcc,4))+"&"+str(round(n_krcc,4))+"&"+str(round(n_r2,2))+"$\pm$"+str(round(n_r2_err,2))+ \
-  "&"+str(round(u_plcc,4))+"&"+str(round(u_srcc,4))+"&"+str(round(u_krcc,4))+"&"+str(round(u_r2,2))+"$\pm$"+str(round(u_r2_err,2))+"\\\\" \
+  # "&"+str(round(n_plcc,4))+"&"+str(round(n_srcc,4))+"&"+str(round(n_krcc,4))+"&"+str(round(n_r2,2))+"$\pm$"+str(round(n_r2_err,2))+ \
+  # "&"+str(round(u_plcc,4))+"&"+str(round(u_srcc,4))+"&"+str(round(u_krcc,4))+"&"+str(round(u_r2,2))+"$\pm$"+str(round(u_r2_err,2))+"\\\\" \
+
+  # )
+
+  
+  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(slope,2))+ \
+
+  "&"+str(round(n_plcc,4))+"&"+str(round(n_srcc,4))+"&"+str(round(n_krcc,4))+"&"+str(round(n_slope,2))+ \
+  "&"+str(round(u_plcc,4))+"&"+str(round(u_srcc,4))+"&"+str(round(u_krcc,4))+"&"+str(round(u_slope,2))+"\\\\" \
 
   )
 
