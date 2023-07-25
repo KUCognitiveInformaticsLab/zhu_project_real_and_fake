@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error, r2_score
 from scipy.stats import sem
+import scipy.stats as stats
 
 # arr1 = np.array(num1)
 # arr2 = np.array(num2)
@@ -16,10 +17,16 @@ models = ["HUMAN","MSE","SSIM","MS_SSIM","NLPD","LPIPS","DISTS"]
 step = "_0.005"
 bar_plcc = [[] for i in range(3)]
 bar_plcc_err = [[] for i in range(3)]
+
 bar_srcc = [[] for i in range(3)]
 bar_srcc_err = [[] for i in range(3)]
+
 bar_krcc = [[] for i in range(3)]
 bar_krcc_err = [[] for i in range(3)]
+
+bar_slope = [[] for i in range(3)]
+bar_slope_err = [[] for i in range(3)]
+
 for model in models:
   filename = "total_analysis_normalize.csv"
   if model != "HUMAN":
@@ -34,6 +41,7 @@ for model in models:
   srccs = []
   krccs = []
   r2s = []
+  slopes = []
 
   for subject in range(14):
     num1 = df.iloc[subject][1:].tolist()
@@ -88,6 +96,9 @@ for model in models:
     srccs.append(srcc)
     krccs.append(krcc)
     r2s.append(r2)
+    slope, _, _, _, _ = stats.linregress(num1, num2)
+    slopes.append(slope)
+
 
 
 
@@ -99,6 +110,8 @@ for model in models:
   krcc_err = sem(krccs)
   r2 = np.mean(r2s)
   r2_err = sem(r2s)
+  slope = np.mean(slopes)
+  slope_err = sem(slopes)
 
   if model=="SSIM" or model=="MS_SSIM":
     model = "1-"+model
@@ -117,8 +130,10 @@ for model in models:
   bar_krcc_err[0].append(krcc_err)
 
 
+  bar_slope[0].append(slope)
+  bar_slope_err[0].append(slope_err)
 
 
 
-  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(r2,2))+"$\pm$"+str(round(r2_err,2))+"\\\\")
 
+  print( model+"&"+str(round(plcc,4))+"&"+str(round(srcc,4))+"&"+str(round(krcc,4))+"&"+str(round(slope,2))+"\\\\")
