@@ -5,5 +5,14 @@
 - We decide to use 2AFC (Two-Alternative Forced Choice)
 QUEST procedure (a bayesian adaptive psychometric method)
 Find the Just noticeable difference (JND)- minimum detectable distortion intensity
-![image](https://github.com/KUCognitiveInformaticsLab/zhu_project_real_and_fake/assets/33627638/1a25c054-59fe-4916-a1f9-0f4b604984b4)
+### Heeger-Bergen texture synthesis algorithm
+- Retain the first-order statistics of both its pixel intensity and responses to multi-orientation and multi-scale filters
+
+### Models
+- Traditional: 
+- MSE, NLPD : low-level features
+- SSIM, MS SSIM: structure information
+- DL-based:
+- LPIPS: deep features extracted by VGG-16
+- DISTS: the combination of deep features and structure information
 
